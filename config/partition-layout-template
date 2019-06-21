@@ -1,0 +1,9 @@
+label: dos
+label-id: 0x9641f58d
+device: /dev/sda
+unit: sectors
+
+/dev/sda1 : start=		  2048, size=		204800, type=83
+/dev/sda2 : start=		206848, size=     25165824, type=83
+/dev/sda3 : start=	  25372672, size= ${SWAP_SIZE}, type=83
+/dev/sda4 : start=	  33761280, size= ${HOME_SIZE}, type=83
