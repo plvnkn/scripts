@@ -1,5 +1,9 @@
 #!/bin/bash
 
+mkdir config
+wget https://raw.githubusercontent.com/plvnkn/scripts/master/config/partition-layout-template -O config/partition-layout-template
+
+
 #get total memory to calculate the SWAP size
 SWAP_SIZE_GB=$(awk '/MemTotal/ { print int(($2/1000/1000)+0.5) }' /proc/meminfo)
 SWAP_SIZE=$(echo "$SWAP_SIZE_GB * 1024*1024 *2" | bc)
@@ -13,6 +17,8 @@ sed -e "s/\${SWAP_SIZE}/$SWAP_SIZE/" \
 	-e "s/\${HOME_START}/$HOME_START/" \
 	-e "s/\${HOME_SIZE}/$HOME_SIZE/" \
 	config/partition-layout-template > partition-config
+
+sfdisk /dev/sda < partition-config
 
 # install dependencies
 
