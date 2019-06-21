@@ -19,14 +19,39 @@ sed -e "s/\${SWAP_SIZE}/$SWAP_SIZE/" \
 	config/partition-layout-template > partition-config
 
 sfdisk /dev/sda < partition-config
+rm partition-config
 
-# install dependencies
+mkfs.ext4 -L BOOT /dev/sda1
+mkfs.ext4 -L ROOT /dev/sda2
+mkfs.ext4 -L HOOT /dev/sda4
+mkswap -L SWAP /dev/sda3
+swapon /dev/sda3
 
-#sudo apt install git x11proto-dev libx11-dev libxft-dev
+#creating and mount folders
+mount /dev/sad2 /mnt
+mkdir -p /mnt/home
+mkdir -p /mnt/boot
 
-#install suckless terminal
+mount /dev/sda4 /mnt/home
+mount /dev/sda1	/mnt/boot
 
-#mkdir ~/tools
-#cd tools
-#git clone https://git.suckless.org/st
-#cd st && sudo make install
+#install arch
+pcastrap /mnt base base-devel wpa_supplicant dialog bash-completion
+genfstab -Up /mnt > /mnt/etc/fstab
+
+arch-chroot /mnt
+
+#confiuration
+read -p 'Hostname: ' HOST_NAME
+echo $HOST_NAME > /etc/hostnamesed
+
+
+lang=$(dialog --clear --title "LANG" --no-tags --menu "Select your locale" 60 10 60 $(ls /usr/share/i18n/locales) 3>&1 1>&2 2>&3 3>&-)
+echo LANG=$lang.UTF-8 > /etc/locale.conf 
+
+keymap=$(dialog --clear --title "KEYMAP" --no-tags --menu "Select your keyboard mapping" 60 10 60 $(localectl list-keymaps) 3>&1 1>&2 2>&3 3>&-)
+echo KEYMAP=$keymap > /etc/vconsole.conf
+
+zone1=$(cd ..dialog --clear --title "ZONE" --no-tags --menu "Select your continent" 60 10 60 $(ls -l /usr/share/zoneinfo/ | grep '^d') 3>&1 1>&2 2>&3 3>&-)
+zone2=$(cd ..dialog --clear --title "ZONE" --no-tags --menu "Select your area" 60 10 60 $(ls -l /usr/share/zoneinfo/$zone1) 3>&1 1>&2 2>&3 3>&-)
+ln -sf /usr/share/zoneinfo/$zone1/$zone2 /etc/localtime
