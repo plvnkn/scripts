@@ -28,7 +28,7 @@ mkswap -L SWAP /dev/sda3
 swapon /dev/sda3
 
 #creating and mount folders
-mount /dev/sad2 /mnt
+mount /dev/sda2 /mnt
 mkdir -p /mnt/home
 mkdir -p /mnt/boot
 
@@ -36,7 +36,7 @@ mount /dev/sda4 /mnt/home
 mount /dev/sda1	/mnt/boot
 
 #install arch
-pcastrap /mnt base base-devel wpa_supplicant dialog bash-completion
+pacstrap /mnt base base-devel wpa_supplicant dialog bash-completion
 genfstab -Up /mnt > /mnt/etc/fstab
 
 arch-chroot /mnt
