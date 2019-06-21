@@ -37,14 +37,15 @@ mount /dev/sda1	/mnt/boot
 
 #install arch
 pacstrap /mnt base base-devel wpa_supplicant dialog bash-completion
+echo "genfstab -Up /mnt > /mnt/etc/fstab"
 genfstab -Up /mnt > /mnt/etc/fstab
 
+echo "arch-chroot /mnt";
 arch-chroot /mnt
 
 #confiuration
 read -p 'Hostname: ' HOST_NAME
-echo $HOST_NAME > /etc/hostnamesed
-
+echo $HOST_NAME > /etc/hostname
 
 lang=$(dialog --clear --title "LANG" --no-tags --menu "Select your locale" 60 10 60 $(ls /usr/share/i18n/locales) 3>&1 1>&2 2>&3 3>&-)
 echo LANG=$lang.UTF-8 > /etc/locale.conf 
