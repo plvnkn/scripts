@@ -18,3 +18,4 @@ zone2=$(dialog --clear --title "ZONE" --no-tags --menu "Select your area" 60 10 
 area=$(ls /usr/share/zoneinfo | grep '^d' | awk '{ print $9 }' | sed -n ${zone2}p)
 
 ln -sf /usr/share/zoneinfo/$continent/$area /etc/localtime
+ls -la
