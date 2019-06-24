@@ -50,6 +50,8 @@ while true; do
 	read -s -p "Repeat Password(Admin): `echo $'\n> '`" ADMIN_REPEAT_PASSWD
 	if [ $ADMIN_PASSWD != $ADMIN_REPEAT_PASSWD ]; then
 		echo 'Passwords are not identical'
+		else
+			break
 	fi
 done
 
