@@ -38,6 +38,6 @@ mount /dev/sda1	/mnt/boot
 wget https://raw.githubusercontent.com/plvnkn/scripts/master/configuration.sh -O /mnt/home/configuration.sh
 
 #install arch
-pacstrap /mnt base base-devel wpa_supplicant dialog bash-completion
+pacstrap /mnt base base-devel wpa_supplicant dialog bash-completion syslinux
 genfstab -Up /mnt > /mnt/etc/fstab
 arch-chroot /mnt
