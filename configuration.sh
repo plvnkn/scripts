@@ -32,15 +32,14 @@ grub-mkconfig -o /boot/grub/grub.cfg
 
 read -p 'Username: ' $USER_NAME
 
-x=0
-while [ x == 0 ]
-do
-	read -s -p 'Password: ' USER_PASSWD
-	read -s -p 'Repeat Password: ' USER_REPEAT_PASSWD
-	if [ $USER_PASSWD != USER_REPEAT_PASSWD ]; then
+while true; do
+	read -s -p '\nPassword: ' USER_PASSWD
+	read -s -p '\nRepeat Password: ' USER_REPEAT_PASSWD
+	if [ $USER_PASSWD != $USER_REPEAT_PASSWD ]; then
 		echo 'Passwords are not identical'
+		else
+			break
 	fi
-	x=1
 done
 
 useradd -m -g users -G wheel,audio,video -s /bin/bash $USERNAME
@@ -49,9 +48,9 @@ echo -e "$USER_PASSWD\n$USER_REPEAT_PASSWD" | passwd $USERNAME
 x=0
 while [ x == 0 ]
 do
-	read -s -p 'Password(Admin): ' ADMIN_PASSWD
-	read -s -p 'Repeat Password(Admin): ' ADMIN_REPEAT_PASSWD
-	if [ $ADMIN_PASSWD != ADMIN_REPEAT_PASSWD ]; then
+	read -s -p '\nPassword(Admin): ' ADMIN_PASSWD
+	read -s -p '\nRepeat Password(Admin): ' ADMIN_REPEAT_PASSWD
+	if [ $ADMIN_PASSWD != $ADMIN_REPEAT_PASSWD ]; then
 		echo 'Passwords are not identical'
 	fi
 	x=1
