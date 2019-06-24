@@ -1,5 +1,9 @@
 #!/bin/bash
 #confiuration
+
+HISTFILE=/home/histfile
+set -o history
+
 read -p 'Hostname: ' HOST_NAME
 echo $HOST_NAME > /etc/hostname
 
@@ -37,8 +41,8 @@ while true; do
 	read -s -p "Repeat Password: `echo $'\n> '`" USER_REPEAT_PASSWD
 	if [ $USER_PASSWD != $USER_REPEAT_PASSWD ]; then
 		echo 'Passwords are not identical'
-		else
-			break
+	else
+		break
 	fi
 done
 
