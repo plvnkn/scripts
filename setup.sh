@@ -40,4 +40,4 @@ wget https://raw.githubusercontent.com/plvnkn/scripts/master/configuration.sh -O
 #install arch
 pacstrap /mnt base base-devel wpa_supplicant dialog bash-completion syslinux
 genfstab -Up /mnt > /mnt/etc/fstab
-arch-chroot /mnt
+arch-chroot /mnt sh /home/configuration.sh

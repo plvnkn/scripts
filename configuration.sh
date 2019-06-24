@@ -30,7 +30,7 @@ systemctl enable NetworkManager
 grub-install /dev/sda
 grub-mkconfig -o /boot/grub/grub.cfg
 
-read -p 'Username: ' $USER_NAME
+read -p 'Username: ' $USERNAME
 
 while true; do
 	read -s -p "Password: `echo $'\n> '`" USER_PASSWD
@@ -45,16 +45,14 @@ done
 useradd -m -g users -G wheel,audio,video -s /bin/bash $USERNAME
 echo -e "$USER_PASSWD\n$USER_REPEAT_PASSWD" | passwd $USERNAME
 
-x=0
-while [ x == 0 ]
-do
+while true; do
 	read -s -p "Password(Admin): `echo $'\n> '`" ADMIN_PASSWD
 	read -s -p "Repeat Password(Admin): `echo $'\n> '`" ADMIN_REPEAT_PASSWD
 	if [ $ADMIN_PASSWD != $ADMIN_REPEAT_PASSWD ]; then
 		echo 'Passwords are not identical'
 	fi
-	x=1
 done
+
 echo -e "$ADMIN_PASSWD\n$ADMIN_REPEAT_PASSWD" | passwd
 
 echo '%wheel ALL=(ALL) ALL' >> /etc/sudoers
