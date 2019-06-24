@@ -20,11 +20,11 @@ ln -sf /usr/share/zoneinfo/$continent/$area /etc/localtime
 
 echo $lang.UTF-8 >> /etc/locale.gen
 
-echo  '[multilib]\nInclude = /etc/pacman.d/mirrorlist' >> /etc/pacman.conf
+echo -e '[multilib]\nInclude = /etc/pacman.d/mirrorlist' >> /etc/pacman.conf
 
 blkid /dev/sda2 | awk '{ print $3 }' | awk -F '"' '$0=$2'
 
-pacman -S networkmanager grub
+yes | pacman -Sy networkmanager grub
 systemctl enable NetworkManager
 
 grub-install /dev/sda
@@ -43,8 +43,8 @@ do
 	x=1
 done
 
-useradd -m -g users -G wheel,audio,video -s /bin/bash $USER_NAME
-echo $USER_PASSWD | passwd $USER_NAME --stdin
+useradd -m -g users -G wheel,audio,video -s /bin/bash $USERNAME
+echo -e "$USER_PASSWD\n$USER_REPEAT_PASSWD" | passwd $USERNAME
 
 x=0
 while [ x == 0 ]
@@ -56,7 +56,7 @@ do
 	fi
 	x=1
 done
-echo $ADMIN_PASSWD | passwd --stdin
+echo -e "$ADMIN_PASSWD\n$ADMIN_REPEAT_PASSWD" | passwd
 
 echo '%wheel ALL=(ALL) ALL' >> /etc/sudoers
 
