@@ -33,12 +33,12 @@ mkdir -p /mnt/boot
 mount /dev/sda4 /mnt/home
 mount /dev/sda1	/mnt/boot
 
-curl https://raw.githubusercontent.com/plvnkn/scripts/master/configuration.sh --create-dirs -o /mnt/home/configuration.sh
-curl https://raw.githubusercontent.com/plvnkn/scripts/master/lib/dialog.functions.sh --create-dirs -o /mnt/home/lib/dialog.functions.sh
-curl https://raw.githubusercontent.com/plvnkn/scripts/master/useradd.sh --create-dirs -o /mnt/home/useradd.sh
-curl https://raw.githubusercontent.com/plvnkn/scripts/master/setPasswd.sh --create-dirs -o /mnt/home/setPasswd.sh
+curl https://raw.githubusercontent.com/plvnkn/scripts/master/configuration.sh --create-dirs -o /mnt/root/configuration.sh
+curl https://raw.githubusercontent.com/plvnkn/scripts/master/lib/dialog.functions.sh --create-dirs -o /mnt/root/lib/dialog.functions.sh
+curl https://raw.githubusercontent.com/plvnkn/scripts/master/useradd.sh --create-dirs -o /mnt/root/useradd.sh
+curl https://raw.githubusercontent.com/plvnkn/scripts/master/setPasswd.sh --create-dirs -o /mnt/root/setPasswd.sh
 
 #install arch
 pacstrap /mnt base base-devel wpa_supplicant dialog bash-completion syslinux
 genfstab -Up /mnt > /mnt/etc/fstab
-arch-chroot /mnt sh /home/configuration.sh
+arch-chroot /mnt sh ~/configuration.sh

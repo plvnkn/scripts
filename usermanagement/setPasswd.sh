@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. lib/dialog.functions.sh
+. ~/lib/dialog.functions.sh
 
 if [ -z $1 ]; then pwForUser="root"; else pwForUser="$1"; fi
 
