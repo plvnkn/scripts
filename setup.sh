@@ -2,7 +2,9 @@
 
 mkdir config
 wget https://raw.githubusercontent.com/plvnkn/scripts/master/config/partition-layout-template -O config/partition-layout-template
-
+wget https://raw.githubusercontent.com/plvnkn/scripts/master/lib/dialog.functions.sh -O lib/dialog.functions.sh
+wget https://raw.githubusercontent.com/plvnkn/scripts/master/useradd.sh -O useradd.sh
+wget https://raw.githubusercontent.com/plvnkn/scripts/master/setPasswd.sh -O setPasswd.sh
 
 #get total memory to calculate the SWAP size
 SWAP_SIZE_GB=$(awk '/MemTotal/ { print int(($2/1000/1000)+0.5) }' /proc/meminfo)

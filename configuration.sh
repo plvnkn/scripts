@@ -1,11 +1,9 @@
 #!/bin/bash
+. lib/dialog.functions.sh
+
 #confiuration
-
-HISTFILE=/home/histfile
-set -o history
-
-read -p 'Hostname: ' HOST_NAME
-echo $HOST_NAME > /etc/hostname
+hostname=$(inputBox "Hostname" "Systen Configuration" "Hostname")
+echo $hostname > /etc/hostname
 
 lang=$(dialog --clear --title "LANG" --no-tags --menu "Select your locale" 60 10 60 $(ls /usr/share/i18n/locales) 3>&1 1>&2 2>&3 3>&-)
 echo LANG=$lang.UTF-8 > /etc/locale.conf 
@@ -34,33 +32,7 @@ systemctl enable NetworkManager
 grub-install /dev/sda
 grub-mkconfig -o /boot/grub/grub.cfg
 
-read -p 'Username: ' $USERNAME
-
-while true; do
-	read -s -p "Password: `echo $'\n> '`" USER_PASSWD
-	read -s -p "Repeat Password: `echo $'\n> '`" USER_REPEAT_PASSWD
-	if [ $USER_PASSWD != $USER_REPEAT_PASSWD ]; then
-		echo 'Passwords are not identical'
-	else
-		break
-	fi
-done
-
-useradd -m -g users -G wheel,audio,video -s /bin/bash $USERNAME
-echo -e "$USER_PASSWD\n$USER_REPEAT_PASSWD" | passwd $USERNAME
-
-while true; do
-	read -s -p "Password(Admin): `echo $'\n> '`" ADMIN_PASSWD
-	read -s -p "Repeat Password(Admin): `echo $'\n> '`" ADMIN_REPEAT_PASSWD
-	if [ $ADMIN_PASSWD != $ADMIN_REPEAT_PASSWD ]; then
-		echo 'Passwords are not identical'
-		else
-			break
-	fi
-done
-
-echo -e "$ADMIN_PASSWD\n$ADMIN_REPEAT_PASSWD" | passwd
+sh usermanagement/useradd.sh
+sh usermanagement/setPasswd.sh
 
 echo '%wheel ALL=(ALL) ALL' >> /etc/sudoers
-
-
