@@ -1,5 +1,5 @@
 #!/bin/bash
-. ~/lib/dialog.functions.sh
+. ~s /lib/dialog.functions.sh
 
 #confiuration
 hostname=$(inputBox "Hostname" "Systen Configuration" "Hostname")
@@ -32,7 +32,7 @@ systemctl enable NetworkManager
 grub-install /dev/sda
 grub-mkconfig -o /boot/grub/grub.cfg
 
-sh ~/usermanagement/useradd.sh
-sh ~/usermanagement/setPasswd.sh
+sh ~/useradd.sh
+sh ~/setPasswd.sh
 
 echo '%wheel ALL=(ALL) ALL' >> /etc/sudoers

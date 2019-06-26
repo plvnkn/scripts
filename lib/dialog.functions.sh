@@ -16,7 +16,7 @@ inputBox() {
 		--backtitle "$2" \
 		--title "$3" \
 		--inputbox "$1" \
-		7 70 "$4" 2>&1 1>&3
+		7 70 2>&1 1>&3
 }
 
 # useage: message "Password" "backtitle" "title"
