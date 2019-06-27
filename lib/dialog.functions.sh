@@ -21,13 +21,11 @@ inputBox() {
 
 # useage: message "Password" "backtitle" "title"
 pwBox() {
-	exec 3>&1
 	dialog \
 		--clear \
 		--backtitle "$2" \
 		--title "$3" \
 		--insecure \
 		--passwordbox "$1" \
-		7 70 2>&1 1>&3
-	exec 3>&-
+		7 70 3>&1 1>&2 2>&3 3>&-
 }
