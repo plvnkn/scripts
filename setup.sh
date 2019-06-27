@@ -42,3 +42,4 @@ curl https://raw.githubusercontent.com/plvnkn/scripts/master/usermanagement/setP
 pacstrap /mnt base base-devel wpa_supplicant dialog bash-completion syslinux
 genfstab -Up /mnt > /mnt/etc/fstab
 arch-chroot /mnt sh ~/configuration.sh
+umount /dev/sda1
