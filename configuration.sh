@@ -5,7 +5,7 @@
 hostname=$(inputBox "Hostname" "Systen Configuration" "Hostname")
 echo $hostname > /etc/hostname
 
-lang=$(dialog --clear --title "LANG" --no-tags --menu "Select your locale" 60 50 60 $(ls /usr/share/i18n/locales) 3>&1 1>&2 2>&3 3>&-)
+lang=$(dialog --clear --title "LANG" --no-tags --menu "Select your locale" 60 50 60 $(ls /usr/share/i18n/locales | awk '{ print NR" "$0 }' ) 3>&1 1>&2 2>&3 3>&-)
 echo LANG=$lang.UTF-8 > /etc/locale.conf 
 
 keymap=$(dialog --clear --title "KEYMAP" --no-tags --menu "Select your keyboard mapping" 60 50 60 $(localectl list-keymaps) 3>&1 1>&2 2>&3 3>&-)
