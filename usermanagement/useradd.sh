@@ -24,4 +24,4 @@ groups=$(inputBox "Groups" "User Management" "Useradd")
 if [ -z $groups ]; then g=""; else g=$(echo "-G $groups"); fi
 useradd -m -g users $g -s /bin/bash $user
 
-sh setPasswd.sh $user
+sh ~/setPasswd.sh $user

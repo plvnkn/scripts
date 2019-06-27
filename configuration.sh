@@ -8,7 +8,7 @@ echo $hostname > /etc/hostname
 lang=$(dialog --clear --title "LANG" --no-tags --menu "Select your locale" 60 50 60 $(ls /usr/share/i18n/locales) 3>&1 1>&2 2>&3 3>&-)
 echo LANG=$lang.UTF-8 > /etc/locale.conf 
 
-keymap=$(dialog --clear --title "KEYMAP" --no-tags --menu "Select your keyboard mapping" 60 10 60 $(localectl list-keymaps) 3>&1 1>&2 2>&3 3>&-)
+keymap=$(dialog --clear --title "KEYMAP" --no-tags --menu "Select your keyboard mapping" 60 50 60 $(localectl list-keymaps) 3>&1 1>&2 2>&3 3>&-)
 echo KEYMAP=$keymap > /etc/vconsole.conf
 
 zone1=$(dialog --clear --title "ZONE" --no-tags --menu "Select your continent" 60 50 60 $(ls -l /usr/share/zoneinfo | grep '^d' | awk '{ print $9 }' | awk '{ print NR" "$0 }') 2>&1 1>&3 3>&-)
