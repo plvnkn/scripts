@@ -1,5 +1,5 @@
 #!/bin/bash
-. ~s /lib/dialog.functions.sh
+. ~/lib/dialog.functions.sh
 
 #confiuration
 hostname=$(inputBox "Hostname" "Systen Configuration" "Hostname")
