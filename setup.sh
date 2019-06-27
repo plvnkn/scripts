@@ -35,8 +35,8 @@ mount /dev/sda1	/mnt/boot
 
 curl https://raw.githubusercontent.com/plvnkn/scripts/master/configuration.sh --create-dirs -o /mnt/root/configuration.sh
 curl https://raw.githubusercontent.com/plvnkn/scripts/master/lib/dialog.functions.sh --create-dirs -o /mnt/root/lib/dialog.functions.sh
-curl https://raw.githubusercontent.com/plvnkn/scripts/master/useradd.sh --create-dirs -o /mnt/root/useradd.sh
-curl https://raw.githubusercontent.com/plvnkn/scripts/master/setPasswd.sh --create-dirs -o /mnt/root/setPasswd.sh
+curl https://raw.githubusercontent.com/plvnkn/scripts/master/usermanagement/useradd.sh --create-dirs -o /mnt/root/useradd.sh
+curl https://raw.githubusercontent.com/plvnkn/scripts/master/usermanagement/setPasswd.sh --create-dirs -o /mnt/root/setPasswd.sh
 
 #install arch
 pacstrap /mnt base base-devel wpa_supplicant dialog bash-completion syslinux

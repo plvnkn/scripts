@@ -7,8 +7,6 @@ if [ -z $1 ]; then pwForUser="root"; else pwForUser="$1"; fi
 #password
 while true
 do
-	exec 3>&1
-	
 	passwd=$(pwBox "Password ($pwForUser)" "User Managment" "Password") 
 	
 	if [ -z $passwd ]; then
@@ -29,8 +27,6 @@ do
 		else
 			break
 	fi
-	
-	exec 3>&-
 done
 
 echo "$pwForUser:$passwd" | chpasswd
