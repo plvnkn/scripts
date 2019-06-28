@@ -11,15 +11,23 @@ cat <<EOF | fdisk /dev/sda
 o
 n
 p
+
+
 $boot
 n
 p
+
+
 +${root}G
 n
 p
+
+
 +${swap}G
 n
 p
+
+
 w
 EOF
 
