@@ -2,19 +2,19 @@
 . ~/lib/dialog.functions.sh
 
 #confiuration
-hostname=$(inputBox "Hostname" "Systen Configuration" "Hostname")
+dialog --no-cancel --inputbox "Hostname" 10 60 2> hostname
 echo $hostname > /etc/hostname
 
-lang=$(dialog --clear --title "LANG" --no-tags --menu "Select your locale" 60 50 60 $(ls /usr/share/i18n/locales | awk '{ print NR" "$0 }' ) 3>&1 1>&2 2>&3 3>&-)
+dialog --clear --title "LANG" --no-tags --menu "Select your locale" 60 50 60 $(ls /usr/share/i18n/locales | awk '{ print NR" "$0 }' ) 2>lang
 echo LANG=$lang.UTF-8 > /etc/locale.conf 
 
-keymap=$(dialog --clear --title "KEYMAP" --no-tags --menu "Select your keyboard mapping" 60 50 60 $(localectl list-keymaps) 3>&1 1>&2 2>&3 3>&-)
+dialog --clear --title "Keymap settings" --no-tags --menu "Select your keyboard mapping" 60 50 60 $(localectl list-keymaps) 2> keymap
 echo KEYMAP=$keymap > /etc/vconsole.conf
 
-zone1=$(dialog --clear --title "ZONE" --no-tags --menu "Select your continent" 60 50 60 $(ls -l /usr/share/zoneinfo | grep '^d' | awk '{ print $9 }' | awk '{ print NR" "$0 }') 3>&1 1>&2 2>&3 3>&-)
+dialog --clear --title "Time zone" --no-tags --menu "Select your continent" 60 50 60 $(ls -l /usr/share/zoneinfo | grep '^d' | awk '{ print $9 }' | awk '{ print NR" "$0 }') 2>zone1
 continent=$(ls -l /usr/share/zoneinfo | grep '^d' | awk '{ print $9 }' | sed -n ${zone1}p)
 
-zone2=$(dialog --clear --title "ZONE" --no-tags --menu "Select your area" 60 50 60 $(ls /usr/share/zoneinfo/$continent | awk '{ print NR" "$0 }') 3>&1 1>&2 2>&3 3>&-)
+dialog --clear --title "ZONE" --no-tags --menu "Select your area" 60 50 60 $(ls /usr/share/zoneinfo/$continent | awk '{ print NR" "$0 }')2> zone2
 area=$(ls /usr/share/zoneinfo/$continent | sed -n ${zone2}p)
 
 ln -sf /usr/share/zoneinfo/$continent/$area /etc/localtime

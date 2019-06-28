@@ -11,21 +11,10 @@ message(){
 
 # useage: message "Username" "backtitle" "title" "default"
 inputBox() {
-	dialog \
-		--clear \
-		--backtitle "$2" \
-		--title "$3" \
-		--inputbox "$1" \
-		7 70 3>&1 1>&2 2>&3 3>&-
+	dialog --no-cancel --inputbox "$1" --backtitle "$2" --title "$3" 10 60
 }
 
 # useage: message "Password" "backtitle" "title"
 pwBox() {
-	dialog \
-		--clear \
-		--backtitle "$2" \
-		--title "$3" \
-		--insecure \
-		--passwordbox "$1" \
-		7 70 3>&1 1>&2 2>&3 3>&-
+	dialog --no-cancel  --backtitle "$2" --title "$3" --insecure --passwordbox "$1" 10 60
 }

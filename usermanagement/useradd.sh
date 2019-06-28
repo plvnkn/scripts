@@ -4,8 +4,7 @@
 #username
 while true
 do
-	user=$(inputBox "Username" "User Management" "Useradd") 
-	
+	inputBox 2>user
 	if [ -z $user ]; then
 		message "The username can not be empty!"
 		continue
@@ -19,6 +18,5 @@ do
 done
 
 useradd -m -g users -G wheel,video,audio -s /bin/bash $user
-
 
 sh ~/setPasswd.sh $user

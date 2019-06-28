@@ -33,7 +33,7 @@ mkdir -p /mnt/boot
 mount /dev/sda4 /mnt/home
 mount /dev/sda1	/mnt/boot
 
-curl https://raw.githubusercontent.com/plvnkn/scripts/master/system-configuration.sh --create-dirs -o /mnt/root/system-configuration.sh
+curl https://raw.githubusercontent.com/plvnkn/scripts/master/configuration.sh --create-dirs -o /mnt/root/configuration.sh
 curl https://raw.githubusercontent.com/plvnkn/scripts/master/lib/dialog.functions.sh --create-dirs -o /mnt/root/lib/dialog.functions.sh
 curl https://raw.githubusercontent.com/plvnkn/scripts/master/usermanagement/useradd.sh --create-dirs -o /mnt/root/useradd.sh
 curl https://raw.githubusercontent.com/plvnkn/scripts/master/usermanagement/setPasswd.sh --create-dirs -o /mnt/root/setPasswd.sh
