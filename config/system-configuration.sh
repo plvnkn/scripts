@@ -1,6 +1,15 @@
 #!/bin/bash
 . ~/lib/dialog.functions.sh
 
+#create a keyfile 
+dd if=/dev/urandom of=/crypto_keyfile.bin bs=512 count=4
+cryptsetup luksAddKey /dev/sda1 /crypto_keyfile.bin
+
+sed -i '/MODULES/c\MOUDULES="ext4"' /etc/mkinitcpio.conf
+sed -i '/HOOKS/c\HOOKS="base udev autodetect modconf block encrypt lvm2 resume filesystems keyboard fsck"' /etc/mkinitcpio.conf
+sed -i '/FILES/c\FILES=/crypto_keyfile.bin' /etc/mkinitcpio.conf
+mkinitcpio -p linux
+
 #confiuration
 hostname=$(inputBox "Hostname" "Systen Configuration" "Hostname")
 echo $hostname > /etc/hostname
@@ -28,8 +37,14 @@ blkid /dev/sda2 | awk '{ print $3 }' | awk -F '"' '$0=$2'
 yes | pacman -Sy networkmanager grub
 systemctl enable NetworkManager
 
-grub-install /dev/sda
+sed -i '/GRUB_CMDLINE_LINUX/c\GRUB_CMDLINE_LINUX="cryptdevice=/dev/sda1:disk"' /etc/deafult/grub
+sed -i '/GRUB_ENABLE_CRYPTODISK/c\GRUB_ENABLE_CRYPTODISK=y' /etc/deafult/grub
+
 grub-mkconfig -o /boot/grub/grub.cfg
+grub-install /dev/sda1
+
+chmod 000 /crypto_keyfile.bin
+chmod -R g-rwx,o-rwx /boot
 
 sh ~/useradd.sh
 sh ~/setPasswd.sh
