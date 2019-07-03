@@ -1,7 +1,7 @@
 #!/bin/bash
-curl https://raw.githubusercontent.com/plvnkn/scripts/master/lib/dialog.functions.sh --O
+curl https://raw.githubusercontent.com/plvnkn/scripts/master/lib/dialog.functions.sh :Q!-O
 
-.dialog.functions.sh
+. ./dialog.functions.sh
 
 
 cat <<EOF | fdisk /dev/sda
