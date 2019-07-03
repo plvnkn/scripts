@@ -10,11 +10,11 @@ p
 w
 EOF
 
-cat <<EOF cryptsetup -q luksFormat -c aes-xts-plain64 -s 512 /dev/sda1
+cat <<EOF | cryptsetup luksFormat -c aes-xts-plain64 -s 512 /dev/sda1
 passwd
 EOF
 
-cat <<EOF cryptsetup luksOpen /dev/sda1 cr_crypto
+cat <<EOF | cryptsetup luksOpen /dev/sda1 cr_crypto
 passwd
 EOF
 
