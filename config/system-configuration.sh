@@ -37,8 +37,8 @@ blkid /dev/sda2 | awk '{ print $3 }' | awk -F '"' '$0=$2'
 yes | pacman -Sy networkmanager grub
 systemctl enable NetworkManager
 
-sed -i '/GRUB_CMDLINE_LINUX/c\GRUB_CMDLINE_LINUX="cryptdevice=/dev/sda1:disk"' /etc/deafult/grub
-sed -i '/GRUB_ENABLE_CRYPTODISK/c\GRUB_ENABLE_CRYPTODISK=y' /etc/deafult/grub
+sed -i '/GRUB_CMDLINE_LINUX/c\GRUB_CMDLINE_LINUX="cryptdevice=/dev/sda1:disk"' /etc/default/grub
+sed -i '/GRUB_ENABLE_CRYPTODISK/c\GRUB_ENABLE_CRYPTODISK=y' /etc/default/grub
 
 grub-mkconfig -o /boot/grub/grub.cfg
 grub-install /dev/sda1
