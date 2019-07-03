@@ -1,4 +1,7 @@
 #!/bin/bash
+curl https://raw.githubusercontent.com/plvnkn/scripts/master/lib/dialog.functions.sh --O
+
+.dialog.functions.sh
 
 
 cat <<EOF | fdisk /dev/sda
@@ -20,7 +23,9 @@ EOF
 
 #get total memory to calculate the SWAP size
 
-dialog --no-cancel --inputbox "Root partition size in GB" 10 60 2> root
+#dialog --no-cancel --inputbox "Root partition size in GB" 10 60 2> root
+
+root=$(inputBox "Root partition size in GB" "Partitioning" "Root") 
 
 swap=$(awk '/MemTotal/ { print int(($2/1000/1000)+0.5) }' /proc/meminfo)
 
