@@ -1,5 +1,5 @@
 #!/bin/bash
-. ~/lib/dialog.functions.sh
+. ./dialog.functions.sh
 
 #username
 while true

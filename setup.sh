@@ -1,5 +1,5 @@
 #!/bin/bash
-curl https://raw.githubusercontent.com/plvnkn/scripts/master/lib/dialog.functions.sh :Q!-O
+curl https://raw.githubusercontent.com/plvnkn/scripts/master/lib/dialog.functions.sh -O
 
 . ./dialog.functions.sh
 
