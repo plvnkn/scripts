@@ -23,7 +23,7 @@ vgcreate vol /dev/mapper/root
 
 #get total memory to calculate the SWAP size
 
-dialog --no-cancel --inputbox "Root partition size in GB" --backtitle "Partitioning" --title "Root" 10 60 2>root
+dialog --no-cancel --inputbox "Root partition size in GB"  10 60 2> root
 
 swap=$(awk '/MemTotal/ { print int(($2/1000/1000)+0.5) }' /proc/meminfo)
 
