@@ -23,15 +23,18 @@ vgcreate vol /dev/mapper/root
 
 #get total memory to calculate the SWAP size
 
-dialog --no-cancel --inputbox "Root partition size in GB"  10 60 2> root
+dialog --no-cancel --inputbox "Root partition size in GB" 10 60 2> root
+g="G"
+root="$root$g"
 
 swap=$(awk '/MemTotal/ { print int(($2/1000/1000)+0.5) }' /proc/meminfo)
+swap="$swap$g"
 
 #lvm
 pvcreate /dev/sda
 vgcreate main /dev/sda
 lvcreate -L ${root}G root -n /dev/sda
-lvcreate -L ${swap} swap -n /dev/sda
+lvcreate -L ${swap}G swap -n /dev/sda
 lvcreate -l 100%FREE  home -n /dev/sda
 
 mkfs.ext4 -L ROOT /dev/main/root
