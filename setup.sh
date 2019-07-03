@@ -6,6 +6,7 @@ n
 p
 
 
+
 w
 EOF
 
@@ -13,7 +14,7 @@ cat <<EOF cryptsetup -q luksFormat -c aes-xts-plain64 -s 512 /dev/sda1
 passwd
 EOF
 
-cat <<EOF cryptsetup luksOpen /dev/sda1 disk
+cat <<EOF cryptsetup luksOpen /dev/sda1 cr_crypto
 passwd
 EOF
 
@@ -24,8 +25,8 @@ dialog --no-cancel --inputbox "Root partition size in GB" 10 60 2> root
 swap=$(awk '/MemTotal/ { print int(($2/1000/1000)+0.5) }' /proc/meminfo)
 
 #lvm
-pvcreate /dev/sda1
-vgcreate main /dev/sda1
+pvcreate /dev/mapper/cr_crypto
+vgcreate main /dev/mapper/cr_crypto
 lvcreate -L ${root}G main -n root
 lvcreate -L ${swap}G main -n swap
 lvcreate -l 100%FREE main -n home
@@ -34,7 +35,6 @@ mkfs.ext4 -L ROOT /dev/main/root
 mkfs.ext4 -L HOOT /dev/main/home
 mkswap -L SWAP /dev/main/swap
 swapon /dev/main/swap
-
 
 #creating and mount folders
 mount /dev/main/root /mnt
