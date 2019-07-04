@@ -9,15 +9,20 @@ n
 p
 
 
++200M
+n
+p
+
+
 
 w
 EOF
 
-cat <<EOF | cryptsetup luksFormat -c aes-xts-plain64 -s 512 /dev/sda1
+cat <<EOF | cryptsetup luksFormat -c aes-xts-plain64 -s 512 /dev/sda2
 passwd
 EOF
 
-cat <<EOF | cryptsetup luksOpen /dev/sda1 cr_crypto
+cat <<EOF | cryptsetup luksOpen /dev/sda2 cr_crypto
 passwd
 EOF
 
@@ -36,18 +41,19 @@ lvcreate -L ${root}G main -n root
 lvcreate -L ${swap}G main -n swap
 lvcreate -l 100%FREE main -n home
 
-mkfs.ext4 -L ROOT /dev/main/root
-mkfs.ext4 -L HOOT /dev/main/home
-mkswap -L SWAP /dev/main/swap
-swapon /dev/main/swap
+mkfs.ext4 /dev/mapper/main-root
+mkfs.ext4 /dev/mapper/main-home
+mkfs.ext2 /dev/sda1
+
+mkswap /dev/mapper/main-swap
+swapon /dev/mapper/main-swap
 
 #creating and mount folders
-mount /dev/main/root /mnt
-mkdir -p /mnt/home
-mkdir -p /mnt/boot
+mount /dev/mapper/main-root /mnt
+mkdir -p /mnt/{home,boot}
 
-mount /dev/main/home /mnt/home
-mount /dev/main/boot /mnt/boot
+mount /dev/mapper/main-home /mnt/home
+mount /dev/sda1 /mnt/boot
 
 curl https://raw.githubusercontent.com/plvnkn/scripts/master/config/system-configuration.sh --create-dirs -o /mnt/root/system-configuration.sh
 curl https://raw.githubusercontent.com/plvnkn/scripts/master/lib/dialog.functions.sh --create-dirs -o /mnt/root/lib/dialog.functions.sh
@@ -58,4 +64,4 @@ curl https://raw.githubusercontent.com/plvnkn/scripts/master/usermanagement/setP
 pacstrap /mnt base base-devel wpa_supplicant dialog bash-completion grub vim
 genfstab -Up /mnt > /mnt/etc/fstab
 arch-chroot /mnt sh ~/system-configuration.sh
-umount /dev/sda1
+umount -R /mnt

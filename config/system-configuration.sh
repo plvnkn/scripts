@@ -5,9 +5,9 @@
 dd if=/dev/urandom of=/crypto_keyfile.bin bs=512 count=4
 cryptsetup luksAddKey /dev/sda1 /crypto_keyfile.bin
 
-sed -i '/MODULES/c\MOUDULES="ext4"' /etc/mkinitcpio.conf
-sed -i '/HOOKS/c\HOOKS="base udev autodetect modconf block encrypt lvm2 resume filesystems keyboard fsck"' /etc/mkinitcpio.conf
-sed -i '/FILES/c\FILES=/crypto_keyfile.bin' /etc/mkinitcpio.conf
+sed -i '/^MODULES/c\MOUDULES="ext4"' /etc/mkinitcpio.conf
+sed -i '/^HOOKS/c\HOOKS="base udev autodetect keyboard keymap modconf block encrypt lvm2 resume filesystems fsck"' /etc/mkinitcpio.conf
+sed -i '/^FILES/c\FILES=/crypto_keyfile.bin' /etc/mkinitcpio.conf
 mkinitcpio -p linux
 
 #confiuration
@@ -32,16 +32,17 @@ echo $lang.UTF-8 >> /etc/locale.gen
 
 echo -e '[multilib]\nInclude = /etc/pacman.d/mirrorlist' >> /etc/pacman.conf
 
-blkid /dev/sda2 | awk '{ print $3 }' | awk -F '"' '$0=$2'
+uuid=$(blkid /dev/sda2 | awk '{ print $3 }' | awk -F '"' '$0=$2')
 
 yes | pacman -Sy networkmanager grub
 systemctl enable NetworkManager
 
-sed -i '/GRUB_CMDLINE_LINUX/c\GRUB_CMDLINE_LINUX="cryptdevice=/dev/sda1:disk"' /etc/default/grub
-sed -i '/GRUB_ENABLE_CRYPTODISK/c\GRUB_ENABLE_CRYPTODISK=y' /etc/default/grub
+sed -i '/^GRUB_CMDLINE_LINUX/c\GRUB_CMDLINE_LINUX="cryptdevice=UUID=$uuid:cr_crypto root=/dev/mapper/main-root resume=/dev/mapper/main-swap cryptkey=rootfs:/crypto_keyfile.bin"' /etc/default/grub
+sed -i '/^GRUB_ENABLE_CRYPTODISK/c\GRUB_ENABLE_CRYPTODISK=y' /etc/default/grub
 
-grub-mkconfig -o /boot/grub/grub.cfg
 grub-install /dev/sda1
+grub-mkconfig -o /boot/grub/grub.cfg
+
 
 chmod 000 /crypto_keyfile.bin
 chmod -R g-rwx,o-rwx /boot
