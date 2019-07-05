@@ -9,20 +9,15 @@ n
 p
 
 
-+200M
-n
-p
-
-
 
 w
 EOF
 
-cat <<EOF | cryptsetup luksFormat -c aes-xts-plain64 -s 512 /dev/sda2
+cat <<EOF | cryptsetup luksFormat --type luks1 -c aes-xts-plain64 -s 512 /dev/sda1
 passwd
 EOF
 
-cat <<EOF | cryptsetup luksOpen /dev/sda2 cr_crypto
+cat <<EOF | cryptsetup luksOpen /dev/sda1 cr_crypto
 passwd
 EOF
 
@@ -43,17 +38,15 @@ lvcreate -l 100%FREE main -n home
 
 mkfs.ext4 /dev/mapper/main-root
 mkfs.ext4 /dev/mapper/main-home
-mkfs.ext2 /dev/sda1
 
 mkswap /dev/mapper/main-swap
 swapon /dev/mapper/main-swap
 
 #creating and mount folders
 mount /dev/mapper/main-root /mnt
-mkdir -p /mnt/{home,boot}
+mkdir -p /mnt/home
 
 mount /dev/mapper/main-home /mnt/home
-mount /dev/sda1 /mnt/boot
 
 curl https://raw.githubusercontent.com/plvnkn/scripts/master/config/system-configuration.sh --create-dirs -o /mnt/root/system-configuration.sh
 curl https://raw.githubusercontent.com/plvnkn/scripts/master/lib/dialog.functions.sh --create-dirs -o /mnt/root/lib/dialog.functions.sh
