@@ -10,7 +10,7 @@ chmod 000 /crypto_keyfile.bin
 grep -o '^[^#]*' /etc/mkinitcpio.conf
 
 sed -i '/^MODULES/c\MOUDULES="ext4"' /etc/mkinitcpio.conf
-sed -i '/^HOOKS/c\HOOKS="base udev autodetect keyboard keymap modconf block encrypt lvm2 resume filesystems fsck shutdown"' /etc/mkinitcpio.conf
+sed -i '/^HOOKS/c\HOOKS="base udev autodetect keyboard keymap modconf block encrypt lvm2 filesystems fsck shutdown"' /etc/mkinitcpio.conf
 sed -i '/^FILES/c\FILES=/crypto_keyfile.bin' /etc/mkinitcpio.conf
 mkinitcpio -p linux
 
