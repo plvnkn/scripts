@@ -3,8 +3,14 @@
 
 #create a keyfile 
 dd if=/dev/urandom of=/crypto_keyfile.bin bs=512 count=4
-cryptsetup luksAddKey /dev/sda1 /crypto_keyfile.bin
+
 chmod 000 /crypto_keyfile.bin
+
+cat <<EOF  cryptsetup luksAddKey /dev/sda1 /crypto_keyfile.bin
+passwd
+EOF
+
+
 
 #remove comments
 sed '/^[[:blank:]]*#/d;s/#.*//' /etc/mkinitcpio.conf
@@ -41,19 +47,13 @@ blkid /dev/sda2 | awk '{ print $3 }' | awk -F '"' '$0=$2'
 yes | pacman -Sy networkmanager grub
 systemctl enable NetworkManager
 
-sed -i '/^GRUB_CMDLINE_LINUX/c\GRUB_CMDLINE_LINUX="cryptdevice=UUID=%uuid%:luks-vgroot"' /etc/default/grub
+sed -i '/^GRUB_CMDLINE_LINUX/c\GRUB_CMDLINE_LINUX="cryptdevice=UUID=%uuid%:luks"' /etc/default/grub
 sed -i s/%uuid%/$(blkid -o value -s UUID /dev/sda1)/ /etc/default/grub
 
 sed -i '/GRUB_ENABLE_CRYPTODISK/c\GRUB_ENABLE_CRYPTODISK=y' /etc/default/grub
 
 grub-mkconfig -o /boot/grub/grub.cfg
 grub-install /dev/sda
-
-
-
-
-chmod 000 /crypto_keyfile.bin
-chmod -R g-rwx,o-rwx /boot
 
 sh ~/useradd.sh
 sh ~/setPasswd.sh
