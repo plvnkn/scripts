@@ -7,7 +7,7 @@ cryptsetup luksAddKey /dev/sda1 /crypto_keyfile.bin
 chmod 000 /crypto_keyfile.bin
 
 #remove comments
-grep -o '^[^#]*' /etc/mkinitcpio.conf
+sed '/^[[:blank:]]*#/d;s/#.*//' /etc/mkinitcpio.conf
 
 sed -i '/^MODULES/c\MOUDULES="ext4"' /etc/mkinitcpio.conf
 sed -i '/^HOOKS/c\HOOKS="base udev autodetect keyboard keymap modconf block encrypt lvm2 filesystems fsck shutdown"' /etc/mkinitcpio.conf
