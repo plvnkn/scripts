@@ -13,14 +13,14 @@ p
 w
 EOF
 
-cryptpasss=$(password_dialog "Enter the password to encrypt your disk") 
+password_dialog "Enter the password to encrypt your disk" "cryptPasswd"
 
 cat <<EOF | cryptsetup luksFormat --type luks1 -c aes-xts-plain64 -s 512 /dev/sda1
-$passwd
+$cryptPasswd
 EOF
 
 cat <<EOF | cryptsetup luksOpen /dev/sda1 luks
-$passwd
+$cryptPasswd
 EOF
 
 root=$(inputBox "Root partition size in GB" "Partitioning" "Root") 
@@ -54,5 +54,5 @@ curl https://raw.githubusercontent.com/plvnkn/scripts/master/usermanagement/setP
 #install arch
 pacstrap /mnt base base-devel wpa_supplicant dialog bash-completion grub vim
 genfstab -Up /mnt > /mnt/etc/fstab
-arch-chroot /mnt sh ~/system-configuration.sh $passwd
+arch-chroot /mnt sh ~/system-configuration.sh
 umount -R /mnt
