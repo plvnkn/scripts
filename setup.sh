@@ -13,17 +13,15 @@ p
 w
 EOF
 
+cryptpasss=$(password_dialog "Enter the password to encrypt your disk") 
+
 cat <<EOF | cryptsetup luksFormat --type luks1 -c aes-xts-plain64 -s 512 /dev/sda1
-passwd
+$passwd
 EOF
 
 cat <<EOF | cryptsetup luksOpen /dev/sda1 luks
-passwd
+$passwd
 EOF
-
-#get total memory to calculate the SWAP size
-
-#dialog --no-cancel --inputbox "Root partition size in GB" 10 60 2> root
 
 root=$(inputBox "Root partition size in GB" "Partitioning" "Root") 
 

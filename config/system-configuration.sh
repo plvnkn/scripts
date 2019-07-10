@@ -10,8 +10,6 @@ cat <<EOF  cryptsetup luksAddKey /dev/sda1 /crypto_keyfile.bin
 passwd
 EOF
 
-
-
 #remove comments
 sed '/^[[:blank:]]*#/d;s/#.*//' /etc/mkinitcpio.conf
 
