@@ -28,7 +28,7 @@ root=$(inputBox "Root partition size in GB" "Partitioning" "Root")
 swap=$(awk '/MemTotal/ { print int(($2/1000/1000)+0.5) }' /proc/meminfo)
 
 #lvm
-pcreate /dev/mapper/luks
+pvcreate /dev/mapper/luks
 vgcreate vgcrypt /dev/mapper/luks
 lvcreate -L ${root}G vgcrypt -n root
 lvcreate -L ${swap}G vgcrypt -n swap
