@@ -7,7 +7,7 @@ dd if=/dev/urandom of=/crypto_keyfile.bin bs=512 count=4
 chmod 000 /crypto_keyfile.bin
 
 cat <<EOF  cryptsetup luksAddKey /dev/sda1 /crypto_keyfile.bin
-passwd
+$passwd
 EOF
 
 #remove comments
