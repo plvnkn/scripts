@@ -4,6 +4,6 @@
 
 if [ -z $1 ]; then pwForUser="root"; else pwForUser="$1"; fi
 
-password_dialog "Password ($pwForUser)" "userPasswd"
+password_dialog "Password ($pwForUser)" "User"
 
-echo "$pwForUser:$userPasswd" | chpasswd
+echo "$pwForUser:${passwd_User}" | chpasswd

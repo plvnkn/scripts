@@ -13,14 +13,14 @@ p
 w
 EOF
 
-password_dialog "Enter the password to encrypt your disk" "cryptPasswd"
+password_dialog "Enter the password to encrypt your disk" "encryption"
 
 cat <<EOF | cryptsetup luksFormat --type luks1 -c aes-xts-plain64 -s 512 /dev/sda1
-$cryptPasswd
+${passwd_encryption}
 EOF
 
 cat <<EOF | cryptsetup luksOpen /dev/sda1 luks
-$cryptPasswd
+${passwd_encryption}
 EOF
 
 root=$(inputBox "Root partition size in GB" "Partitioning" "Root") 

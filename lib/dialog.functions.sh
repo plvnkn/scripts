@@ -32,13 +32,16 @@ pwBox() {
 }
 
 password_dialog() {
+OPTION="passwd_$1"	
+
 while true
 do
-	$2=$(pwBox "$1")
+	$pw=$(pwBox "$1")
 	if [ -z $passwd ]; then
 		message "The password can not be empty!"
 		continue
 	fi
+	
 	
 	passwd_repeat=$(pwBox "Confirm Password")
 	
@@ -47,12 +50,13 @@ do
 		continue
 	fi
 	
-	if [ "$2" != "$passwd_repeat" ]; then
+	if [ "$pw" != "$passwd_repeat" ]; then
 		message "The passwords are not identically!"
 		continue
 		else
-			export $2
+			printf -v $OPTION "$pw"
 			break
 	fi
 done
 }
+
