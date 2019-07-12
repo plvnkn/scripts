@@ -36,12 +36,11 @@ OPTION="passwd_$1"
 
 while true
 do
-	$pw=$(pwBox "$1")
+	$passwd=$(pwBox "$1")
 	if [ -z $passwd ]; then
 		message "The password can not be empty!"
 		continue
-	fi
-	
+	fi	
 	
 	passwd_repeat=$(pwBox "Confirm Password")
 	
@@ -50,11 +49,11 @@ do
 		continue
 	fi
 	
-	if [ "$pw" != "$passwd_repeat" ]; then
+	if [ "$passwd" != "$passwd_repeat" ]; then
 		message "The passwords are not identically!"
 		continue
 		else
-			printf -v $OPTION "$pw"
+			printf -v $OPTION $passwd
 			break
 	fi
 done
