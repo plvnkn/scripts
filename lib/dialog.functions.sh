@@ -36,7 +36,8 @@ OPTION="passwd_$1"
 
 while true
 do
-	$passwd=$(pwBox "$1")
+	passwd=$(pwBox "$1")
+	
 	if [ -z $passwd ]; then
 		message "The password can not be empty!"
 		continue
