@@ -15,6 +15,8 @@ EOF
 
 password_dialog "Enter the password to encrypt your disk" "encryption"
 
+export passwd_encryption=${passwd_encryption}
+
 cat <<EOF | cryptsetup luksFormat --type luks1 -c aes-xts-plain64 -s 512 /dev/sda1
 ${passwd_encryption}
 EOF
@@ -54,5 +56,5 @@ curl https://raw.githubusercontent.com/plvnkn/scripts/master/usermanagement/setP
 #install arch
 pacstrap /mnt base base-devel wpa_supplicant dialog bash-completion grub vim
 genfstab -Up /mnt > /mnt/etc/fstab
-arch-chroot /mnt sh ~/system-configuration.sh
+arch-chroot /mnt sh ~/system-configuration.sh "${passwd_encryption}"
 umount -R /mnt
