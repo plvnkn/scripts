@@ -56,5 +56,5 @@ curl https://raw.githubusercontent.com/plvnkn/scripts/master/usermanagement/setP
 #install arch
 pacstrap /mnt base base-devel wpa_supplicant dialog bash-completion grub vim
 genfstab -Up /mnt > /mnt/etc/fstab
-arch-chroot /mnt sh ~/system-configuration.sh "${passwd_encryption}"
+arch-chroot /mnt bash ~/system-configuration.sh "${passwd_encryption}"
 umount -R /mnt
