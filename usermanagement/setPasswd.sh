@@ -8,4 +8,4 @@ password_dialog "Password ($pwForUser)" "User"
 
 pwconv
 
-echo "$pwForUser:${passwd_User}" | chpasswd
+echo ${passwd_User} | passwd --stdin $pwForUser
