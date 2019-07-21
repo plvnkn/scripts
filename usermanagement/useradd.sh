@@ -20,4 +20,4 @@ done
 useradd -m -g users -G wheel,video,audio -s /bin/bash $user
 
 
-sh ~/setPasswd.sh $user
+psswd $user
