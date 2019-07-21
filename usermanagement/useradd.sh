@@ -19,5 +19,4 @@ done
 
 useradd -m -g users -G wheel,video,audio -s /bin/bash $user
 
-
-passwd $user
+sh passwd.sh $user
