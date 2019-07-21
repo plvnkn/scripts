@@ -54,5 +54,5 @@ grub-mkconfig -o /boot/grub/grub.cfg
 grub-install /dev/sda
 
 sh ~/useradd.sh
-passwd
+passwd root
 echo '%wheel ALL=(ALL) ALL' >> /etc/sudoers
