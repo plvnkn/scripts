@@ -53,6 +53,4 @@ sed -i '/GRUB_ENABLE_CRYPTODISK/c\GRUB_ENABLE_CRYPTODISK=y' /etc/default/grub
 grub-mkconfig -o /boot/grub/grub.cfg
 grub-install /dev/sda
 
-sh ~/useradd.sh
-passwd
 echo '%wheel ALL=(ALL) ALL' >> /etc/sudoers
