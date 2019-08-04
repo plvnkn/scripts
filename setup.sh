@@ -20,11 +20,11 @@ do
 	read -s passwd_encryption;
 	
 	if [ -z $passwd_encryption ]; then
-		echo "The password can not be empty!\n"
+		echo "The password can not be empty!"
 		continue
 	fi	
 	
-	echo -n
+	echo -n ""
 	echo -n "Repeat password: "
 	read -s passwd_repeat;
 	
@@ -37,7 +37,6 @@ do
 		echo "The passwords are not identically!"
 		continue
 		else
-			printf -v $OPTION $passwd
 			break
 	fi
 done
@@ -53,7 +52,7 @@ ${passwd_encryption}
 EOF
 
 clear
-echo -n "Enter the root partition size in GB"
+echo -n "Enter the root partition size in GB: "
 read root;
 
 swap=$(awk '/MemTotal/ { print int(($2/1000/1000)+0.5) }' /proc/meminfo)
