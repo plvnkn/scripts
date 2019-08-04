@@ -11,7 +11,34 @@ p
 w
 EOF
 
-password_dialog "Enter the password to encrypt your disk" "encryption"
+clear
+echo "--- Disc Encryption ---"
+
+while true
+do
+	echo -n "Password";
+	read -s passwd_encryption;
+	
+	if [ -z $passwd ]; then
+		message "The password can not be empty!"
+		continue
+	fi	
+	echo -n "Repeat password"
+	read -s passwd_repeat;
+	
+	if [ -z $passwd_repeat ]; then
+		message "The confirmation password can not be empty!"
+		continue
+	fi
+	
+	if [ "$passwd" != "$passwd_repeat" ]; then
+		message "The passwords are not identically!"
+		continue
+		else
+			printf -v $OPTION $passwd
+			break
+	fi
+done
 
 export passwd_encryption=${passwd_encryption}
 
@@ -23,7 +50,9 @@ cat <<EOF | cryptsetup luksOpen /dev/sda1 luks
 ${passwd_encryption}
 EOF
 
-root=$(inputBox "Root partition size in GB" "Partitioning" "Root") 
+clear
+echo -n "Enter the root partition size in GB"
+read root;
 
 swap=$(awk '/MemTotal/ { print int(($2/1000/1000)+0.5) }' /proc/meminfo)
 
