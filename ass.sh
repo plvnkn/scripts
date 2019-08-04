@@ -72,7 +72,7 @@ done
 
 export passwd_encryption=${passwd_encryption}
 
-printf "\nEncryption disc..."
+printf "\nEncrypting disc..."
 
 cat <<EOF | cryptsetup luksFormat --type luks1 -c aes-xts-plain64 -s 512 /dev/sda1
 ${passwd_encryption}
@@ -82,7 +82,7 @@ cat <<EOF | cryptsetup luksOpen /dev/sda1 luks
 ${passwd_encryption}
 EOF
 
-printf "\ndisc encryption done"
+printf "\nDisc encryption done"
 
 printf "\n${yellow}Enter the root partition size in GB: ${normal}"
 read root;
