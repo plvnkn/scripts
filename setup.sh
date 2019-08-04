@@ -53,6 +53,8 @@ curl https://raw.githubusercontent.com/plvnkn/scripts/master/lib/dialog.function
 curl https://raw.githubusercontent.com/plvnkn/scripts/master/usermanagement/useradd.sh --create-dirs -o /mnt/root/useradd.sh
 curl https://raw.githubusercontent.com/plvnkn/scripts/master/usermanagement/setPasswd.sh --create-dirs -o /mnt/root/setPasswd.sh
 
+chmod +x /mnt/root/*
+
 #install arch
 pacstrap /mnt base base-devel wpa_supplicant dialog bash-completion grub vim
 genfstab -Up /mnt > /mnt/etc/fstab
