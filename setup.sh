@@ -78,7 +78,6 @@ mkdir -p /mnt/home
 mount /dev/mapper/vgcrypt-home /mnt/home
 
 curl https://raw.githubusercontent.com/plvnkn/scripts/master/config/system-configuration.sh --create-dirs -o /mnt/root/system-configuration.sh
-curl https://raw.githubusercontent.com/plvnkn/scripts/master/usermanagement/useradd.sh --create-dirs -o /mnt/root/useradd.sh
 
 chmod +x /mnt/root/*
 
