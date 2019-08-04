@@ -1,0 +1,17 @@
+package-name,package-type
+firefox
+yay,a
+i3-gaps
+i3blocks
+i3lock
+xorg-server
+xorg-xinit
+xorg-xbacklight
+xcompmgr
+libnotify
+dunst
+feh
+gnome-keyring
+networkmanager
+pulseaudio
+simple-mtpfs,a
