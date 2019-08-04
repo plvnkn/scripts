@@ -1,9 +1,10 @@
 #!/bin/bash
-
+clear
+printf "Adding a new user"
 while true
 	do
-	
-		echo -n "Enter a username and confirm with [ENTER]: "
+
+		printf "\nEnter a username and confirm with [ENTER]: "
 		read user
 
 		if [ -z $user ]; then
@@ -20,6 +21,6 @@ while true
 
 useradd -m -g users -G wheel,video,audio -s /bin/bash $user
 
-echo " -- Password for user $user --"
+printf "Password for user $user\n:"
 passwd $user
 

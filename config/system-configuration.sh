@@ -1,6 +1,9 @@
 #!/bin/bash
 . ~/lib/dialog.functions.sh
 
+blue=$(tput setaf 4)
+normal=$(tput sgr0)
+
 #create a keyfile 
 dd if=/dev/urandom of=/crypto_keyfile.bin bs=512 count=4
 
@@ -20,11 +23,11 @@ mkinitcpio -p linux
 
 #confiuration
 clear
-echo -n "Enter the hostname for this machine and confirm with [ENTER]: "
+printf "\n${blue}Hostname: ${normal}"
 read hostname
 echo $hostname > /etc/hostname
 
-PS3="Select the locale"
+PS3="${blue}Select the locale${normal}\n"
 options=("en_US" "de_DE" "ru_RU" "other")
 select opt in "${options[@]}"
 do
@@ -57,7 +60,7 @@ do
     esac
 done
 
-PS3="Slect the keymap"
+PS3="${blue}Slect the keymap${normal}\n"
 options=("us" "de" "ru" "other")
 select opt in "${options[@]}"
 do

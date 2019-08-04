@@ -1,6 +1,8 @@
 #!/bin/bash
 
-source <(curl -s https://raw.githubusercontent.com/plvnkn/scripts/master/lib/dialog.functions.sh)
+blue=$(tput setaf 4)
+normal=$(tput sgr0)
+
 
 cat <<EOF | fdisk /dev/sda
 n
@@ -12,11 +14,11 @@ w
 EOF
 
 clear
-printf "--- Disc Encryption ---"
+printf "${blue}--- Disc Encryption --- ${normal}"
 
 while true
 do
-	printf "\nPassword: \n";
+	printf "\nPassword: "
 	read -s passwd_encryption;
 	
 	if [ -z $passwd_encryption ]; then
@@ -24,7 +26,7 @@ do
 		continue
 	fi	
 	
-	printf "Repeat password: \n"
+	printf "\nRepeat password: "
 	read -s passwd_repeat;
 	
 	if [ -z $passwd_repeat ]; then
@@ -51,7 +53,7 @@ ${passwd_encryption}
 EOF
 
 clear
-echo -n "Enter the root partition size in GB: "
+printf "\n${blue}Enter the root partition size in GB: ${normal}"
 read root;
 
 swap=$(awk '/MemTotal/ { print int(($2/1000/1000)+0.5) }' /proc/meminfo)
@@ -87,7 +89,7 @@ arch-chroot /mnt /root/system-configuration.sh "${passwd_encryption}"
 
 arch-chroot /mnt /root/useradd.sh
 
-echo " -- Root password --"
+echo "${blue}--- Root password ---${normal}"
 arch-chroot /mnt passwd
 
 umount -R /mnt
