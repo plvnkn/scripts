@@ -49,8 +49,7 @@ sed -i '/^GRUB_CMDLINE_LINUX/c\GRUB_CMDLINE_LINUX="cryptdevice=UUID=%uuid%:luks"
 sed -i s/%uuid%/$(blkid -o value -s UUID /dev/sda1)/ /etc/default/grub
 
 sed -i '/GRUB_ENABLE_CRYPTODISK/c\GRUB_ENABLE_CRYPTODISK=y' /etc/default/grub
-
-grub-mkconfig -o /boot/grub/grub.cfg
 grub-install /dev/sda
+grub-mkconfig -o /boot/grub/grub.cfg
 
 echo '%wheel ALL=(ALL) ALL' >> /etc/sudoers
