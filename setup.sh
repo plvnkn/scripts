@@ -16,14 +16,14 @@ echo "--- Disc Encryption ---"
 
 while true
 do
-	echo -n "Password";
+	echo -n "Password:\n";
 	read -s passwd_encryption;
 	
-	if [ -z $passwd ]; then
-		message "The password can not be empty!"
+	if [ -z $passwd_encryption ]; then
+		echo "The password can not be empty!\n"
 		continue
 	fi	
-	echo -n "Repeat password"
+	echo -n "Repeat password:\n"
 	read -s passwd_repeat;
 	
 	if [ -z $passwd_repeat ]; then
@@ -32,7 +32,7 @@ do
 	fi
 	
 	if [ "$passwd" != "$passwd_repeat" ]; then
-		message "The passwords are not identically!"
+		echo "The passwords are not identically!"
 		continue
 		else
 			printf -v $OPTION $passwd
