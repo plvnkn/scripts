@@ -1,7 +1,6 @@
 #!/bin/bash
 
-addUser() {
-	while true
+while true
 	do
 	
 		echo -n "Enter a username and confirm with [ENTER]: "
@@ -19,8 +18,8 @@ addUser() {
 		fi
 	done
 
-	useradd -m -g users -G wheel,video,audio -s /bin/bash $user
+useradd -m -g users -G wheel,video,audio -s /bin/bash $user
 
-	echo " -- Password for user $user --"
-	passwd $user
-}
+echo " -- Password for user $user --"
+passwd $user
+

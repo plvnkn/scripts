@@ -1,8 +1,6 @@
 #!/bin/bash
-curl https://raw.githubusercontent.com/plvnkn/scripts/master/lib/dialog.functions.sh -O
 
-. ./dialog.functions.sh
-
+source <(curl -s https://raw.githubusercontent.com/plvnkn/scripts/master/lib/dialog.functions.sh)
 
 cat <<EOF | fdisk /dev/sda
 n
@@ -49,9 +47,7 @@ mkdir -p /mnt/home
 mount /dev/mapper/vgcrypt-home /mnt/home
 
 curl https://raw.githubusercontent.com/plvnkn/scripts/master/config/system-configuration.sh --create-dirs -o /mnt/root/system-configuration.sh
-curl https://raw.githubusercontent.com/plvnkn/scripts/master/lib/dialog.functions.sh --create-dirs -o /mnt/root/lib/dialog.functions.sh
 curl https://raw.githubusercontent.com/plvnkn/scripts/master/usermanagement/useradd.sh --create-dirs -o /mnt/root/useradd.sh
-curl https://raw.githubusercontent.com/plvnkn/scripts/master/usermanagement/setPasswd.sh --create-dirs -o /mnt/root/setPasswd.sh
 
 chmod +x /mnt/root/*
 
