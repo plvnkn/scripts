@@ -24,6 +24,7 @@ echo -n "Enter the hostname for this machine and confirm with [ENTER]: "
 read hostname
 echo $hostname > /etc/hostname
 
+PS3="Select the locale"
 options=("en_US" "de_DE" "ru_RU" "other")
 select opt in "${options[@]}"
 do
@@ -56,30 +57,31 @@ do
     esac
 done
 
-
+PS3="Slect the keymap"
 options=("us" "de" "ru" "other")
 select opt in "${options[@]}"
 do
     case $opt in
         "us")
+			echo "KEYMAP=us" > /etc/vconsole.conf
 			echo "us" > /etc/locale.conf
             echo "Your keymap is set to 'us'"
             break
             ;;
         "de")
-			echo "de" > /etc/locale.conf
+			echo "KEYMAP=de" > /etc/vconsole.conf
             echo "Your keymap is set to 'de'"
             break
             ;;
         "ru")
-			echo "ru" > /etc/locale.conf
+			echo "KEYMAP=ru" > /etc/vconsole.conf
             echo "Your keymap is set to 'ru'"
             break
             ;;
         "other")
 			echo -n "Enter the keymap for this machine and confirm with [ENTER]: "
 			read keymap
-			echo $keymap > /etc/locale.conf
+			echo KEYMAP=$keymap > /etc/vconsole.conf
 			break
 			;;
         "Quit")
