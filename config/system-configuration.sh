@@ -1,7 +1,7 @@
 #!/bin/bash
 . ~/lib/dialog.functions.sh
 
-blue=$(tput setaf 4)
+yellow=$(tput setaf 3)
 normal=$(tput sgr0)
 
 #create a keyfile 
@@ -23,11 +23,11 @@ mkinitcpio -p linux
 
 #confiuration
 clear
-printf "\n${blue}Hostname: ${normal}"
+printf "\n${yellow}Hostname: ${normal}"
 read hostname
 echo $hostname > /etc/hostname
 
-PS3="${blue}Select the locale${normal}\n"
+PS3="${yellow}Select the locale${normal}\n"
 options=("en_US" "de_DE" "ru_RU" "other")
 select opt in "${options[@]}"
 do
@@ -60,7 +60,7 @@ do
     esac
 done
 
-PS3="${blue}Slect the keymap${normal}\n"
+PS3="${yellow}Slect the keymap${normal}\n"
 options=("us" "de" "ru" "other")
 select opt in "${options[@]}"
 do

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-blue=$(tput setaf 4)
+yellow=$(tput setaf 3)
 normal=$(tput sgr0)
 
 
@@ -14,7 +14,7 @@ w
 EOF
 
 clear
-printf "${blue}--- Disc Encryption --- ${normal}"
+printf "${yellow}--- Disc Encryption --- ${normal}"
 
 while true
 do
@@ -53,7 +53,7 @@ ${passwd_encryption}
 EOF
 
 clear
-printf "\n${blue}Enter the root partition size in GB: ${normal}"
+printf "\n${yellow}Enter the root partition size in GB: ${normal}"
 read root;
 
 swap=$(awk '/MemTotal/ { print int(($2/1000/1000)+0.5) }' /proc/meminfo)
@@ -89,7 +89,7 @@ arch-chroot /mnt /root/system-configuration.sh "${passwd_encryption}"
 
 arch-chroot /mnt /root/useradd.sh
 
-echo "${blue}--- Root password ---${normal}"
+echo "${yellow}--- Root password ---${normal}"
 arch-chroot /mnt passwd
 
 umount -R /mnt
