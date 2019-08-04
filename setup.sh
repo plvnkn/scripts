@@ -3,6 +3,7 @@
 yellow=$(tput setaf 3)
 normal=$(tput sgr0)
 
+printf "Preparing disc for install"
 
 cat <<EOF | fdisk /dev/sda
 n
@@ -13,8 +14,10 @@ p
 w
 EOF
 
-clear
-printf "${yellow}--- Disc Encryption --- ${normal}"
+printf "disc preparation done"
+
+
+printf "\n${yellow}--- Disc Encryption --- ${normal}"
 
 while true
 do
@@ -44,6 +47,8 @@ done
 
 export passwd_encryption=${passwd_encryption}
 
+printf "Encryption disc..."
+
 cat <<EOF | cryptsetup luksFormat --type luks1 -c aes-xts-plain64 -s 512 /dev/sda1
 ${passwd_encryption}
 EOF
@@ -52,7 +57,8 @@ cat <<EOF | cryptsetup luksOpen /dev/sda1 luks
 ${passwd_encryption}
 EOF
 
-clear
+printf "disc encryption done"
+
 printf "\n${yellow}Enter the root partition size in GB: ${normal}"
 read root;
 
@@ -85,8 +91,6 @@ chmod +x /mnt/root/*
 pacstrap /mnt base base-devel wpa_supplicant dialog bash-completion grub vim
 genfstab -Up /mnt > /mnt/etc/fstab
 arch-chroot /mnt /root/system-configuration.sh "${passwd_encryption}"
-
-arch-chroot /mnt /root/useradd.sh
 
 echo "${yellow}--- Root password ---${normal}"
 arch-chroot /mnt passwd

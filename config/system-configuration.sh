@@ -94,13 +94,29 @@ do
     esac
 done
 
-zone1=$(dialog --clear --title "ZONE" --no-tags --menu "Select your continent" 60 50 60 $(ls -l /usr/share/zoneinfo | grep '^d' | awk '{ print $9 }' | awk '{ print NR" "$0 }') 3>&1 1>&2 2>&3 3>&-)
-continent=$(ls -l /usr/share/zoneinfo | grep '^d' | awk '{ print $9 }' | sed -n ${zone1}p)
 
-zone2=$(dialog --clear --title "ZONE" --no-tags --menu "Select your area" 60 50 60 $(ls /usr/share/zoneinfo/$continent | awk '{ print NR" "$0 }') 3>&1 1>&2 2>&3 3>&-)
-area=$(ls /usr/share/zoneinfo/$continent | sed -n ${zone2}p)
+cd /usr/share/zoneinfo
+area=$(ls -d */ | grep -v "Etc/\|posix/\|right/\|SystemV/" | cut -f1 -d'/')
+select area1 in $area
+do
+    case $area1 in
+        *) echo "You have chosen $area1"
+        break
+        ;;
+    esac
+done
+cd -
 
-ln -sf /usr/share/zoneinfo/$continent/$area /etc/localtime
+select area2 in $(ls /usr/share/zoneinfo/$area1)
+do
+    case $area2 in
+        *) echo "You have chosen $area2"
+        break
+        ;;
+    esac
+done
+
+ln -sf /usr/share/zoneinfo/$area1/$area2 /etc/localtime
 
 echo $lang.UTF-8 >> /etc/locale.gen
 
