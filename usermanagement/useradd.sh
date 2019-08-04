@@ -19,5 +19,5 @@ done
 
 useradd -m -g users -G wheel,video,audio -s /bin/bash $user
 
-
+echo " -- Password for user $user --"
 passwd $user

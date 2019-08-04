@@ -61,6 +61,8 @@ genfstab -Up /mnt > /mnt/etc/fstab
 arch-chroot /mnt /root/system-configuration.sh "${passwd_encryption}"
 
 arch-chroot /mnt /root/useradd.sh
-arch-chroot /mnt /root/setPasswd.sh
+
+echo " -- Root password --"
+arch-chroot /mnt passwd
 
 umount -R /mnt
