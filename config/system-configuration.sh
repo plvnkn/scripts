@@ -27,7 +27,7 @@ printf "\n${yellow}Hostname: ${normal}"
 read hostname
 echo $hostname > /etc/hostname
 
-PS3="${yellow}Select the locale${normal}\n"
+PS3="${yellow}Select the locale${normal}: "
 options=("en_US" "de_DE" "ru_RU" "other")
 select opt in "${options[@]}"
 do
@@ -60,7 +60,7 @@ do
     esac
 done
 
-PS3="${yellow}Slect the keymap${normal}\n"
+PS3="${yellow}Slect the keymap${normal}: "
 options=("us" "de" "ru" "other")
 select opt in "${options[@]}"
 do

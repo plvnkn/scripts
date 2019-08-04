@@ -1,6 +1,10 @@
 #!/bin/bash
+
+yellow=$(tput setaf 3)
+normal=$(tput sgr0)
+
 clear
-printf "Adding a new user"
+printf "${yellow}Adding a new user${normal}"
 while true
 	do
 
@@ -19,8 +23,8 @@ while true
 		fi
 	done
 
-useradd -m -g users -G wheel,video,audio -s /bin/bash $user
+useradd -m -g users -G wheel,video,audio s /bin/bash $user
 
-printf "Password for user $user\n:"
+printf "Password for user $user\n"
 passwd $user
 
