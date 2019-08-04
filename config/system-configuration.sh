@@ -137,6 +137,6 @@ while true
 		fi
 done
 
-useradd -m -g users -G wheel,video,audio s /bin/bash $user
+useradd -m -g users -G wheel,video,audio -s /bin/bash $user
 printf "Password for user $user\n"
 passwd $user
