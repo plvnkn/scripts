@@ -12,29 +12,28 @@ w
 EOF
 
 clear
-echo "--- Disc Encryption ---"
+printf "--- Disc Encryption ---"
 
 while true
 do
-	echo -n "Password: ";
+	printf "\nPassword: \n";
 	read -s passwd_encryption;
 	
 	if [ -z $passwd_encryption ]; then
-		echo "The password can not be empty!"
+		printf "\nThe password can not be empty!"
 		continue
 	fi	
 	
-	echo -n ""
-	echo -n "Repeat password: "
+	printf "Repeat password: \n"
 	read -s passwd_repeat;
 	
 	if [ -z $passwd_repeat ]; then
-		echo "The confirmation password can not be empty!"
+		printf "\nThe confirmation password can not be empty!"
 		continue
 	fi
 	
 	if [ "$passwd_encryption" != "$passwd_repeat" ]; then
-		echo "The passwords are not identically!"
+		printf "\nThe passwords are not identically!"
 		continue
 		else
 			break
