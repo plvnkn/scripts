@@ -1,6 +1,4 @@
 #!/bin/bash
-. ~/lib/dialog.functions.sh
-
 yellow=$(tput setaf 3)
 normal=$(tput sgr0)
 

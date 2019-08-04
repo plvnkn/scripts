@@ -16,7 +16,6 @@ EOF
 
 printf "disc preparation done"
 
-
 printf "\n${yellow}--- Disc Encryption --- ${normal}"
 
 while true
