@@ -19,14 +19,75 @@ sed -i '/^FILES/c\FILES=/crypto_keyfile.bin' /etc/mkinitcpio.conf
 mkinitcpio -p linux
 
 #confiuration
-hostname=$(inputBox "Hostname" "Systen Configuration" "Hostname")
+clear
+echo -n "Enter the hostname for this machine and confirm with [ENTER]: "
+read hostname
 echo $hostname > /etc/hostname
 
-lang=$(dialog --clear --title "LANG" --no-tags --menu "Select your locale" 60 50 60 $(ls /usr/share/i18n/locales | awk '{ print NR" "$0 }' ) 3>&1 1>&2 2>&3 3>&-)
-echo LANG=$lang.UTF-8 > /etc/locale.conf 
+options=("en_US" "de_DE" "ru_RU" "other")
+select opt in "${options[@]}"
+do
+    case $opt in
+        "en_US")
+			echo "LANG=en_US.UTF-8 "> /etc/locale.conf
+            echo "Your locale is set to 'en_US.UTF-8'"
+            break
+            ;;
+        "de_DE")
+			echo "LANG=de_DE.UTF-8 "> /etc/locale.conf
+            echo "Your locale is set to 'de_DE.UTF-8'"
+            break
+            ;;
+        "ru_RU")
+			echo "LANG=ru_RU.UTF-8 "> /etc/locale.conf
+            echo "Your locale is set to 'ru_RU.UTF-8'"
+            break
+            ;;
+        "other")
+			echo -n "Enter the locale for this machine and confirm with [ENTER]: "
+			read locale
+			echo LANG=$locale.UTF-8 > /etc/hostname
+			break
+			;;
+        "Quit")
+            break
+            ;;
+        *) echo "invalid option $REPLY";;
+    esac
+done
 
-keymap=$(dialog --clear --title "KEYMAP" --no-tags --menu "Select your keyboard mapping" 60 50 60 $(localectl list-keymaps) 3>&1 1>&2 2>&3 3>&-)
-echo KEYMAP=$keymap > /etc/vconsole.conf
+
+options=("us" "de" "ru" "other")
+select opt in "${options[@]}"
+do
+    case $opt in
+        "us")
+			echo "us" > /etc/locale.conf
+            echo "Your keymap is set to 'us'"
+            break
+            ;;
+        "de")
+			echo "de" > /etc/locale.conf
+            echo "Your keymap is set to 'de'"
+            break
+            ;;
+        "ru")
+			echo "ru" > /etc/locale.conf
+            echo "Your keymap is set to 'ru'"
+            break
+            ;;
+        "other")
+			echo -n "Enter the keymap for this machine and confirm with [ENTER]: "
+			read keymap
+			echo $keymap > /etc/locale.conf
+			break
+			;;
+        "Quit")
+            break
+            ;;
+        *) echo "invalid option $REPLY";;
+    esac
+done
 
 zone1=$(dialog --clear --title "ZONE" --no-tags --menu "Select your continent" 60 50 60 $(ls -l /usr/share/zoneinfo | grep '^d' | awk '{ print $9 }' | awk '{ print NR" "$0 }') 3>&1 1>&2 2>&3 3>&-)
 continent=$(ls -l /usr/share/zoneinfo | grep '^d' | awk '{ print $9 }' | sed -n ${zone1}p)
