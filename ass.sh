@@ -113,7 +113,7 @@ curl https://raw.githubusercontent.com/plvnkn/scripts/master/setup-system.sh --c
 chmod +x /mnt/root/*
 
 #install arch
-pacstrap /mnt base base-devel wpa_supplicant dialog bash-completion grub neuvim
+pacstrap /mnt base base-devel wpa_supplicant dialog bash-completion grub neovim
 genfstab -Up /mnt > /mnt/etc/fstab
 arch-chroot /mnt /root/setup-system.sh "${passwd_encryption}"
 

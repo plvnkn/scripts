@@ -5,16 +5,16 @@ cd ~/tools
 git clone https://aur.archlinux.org/yay.git
 cd yay
 makepkg -si
-cd -
+cd ~
 
 while IFS=, read -r package type
 do
 	case "$type" in
 			"") 
-				pacman -S "$package" 
+				pacman --no-confirm --needed -Syy "$package" 
 				;;
 			"a") 
-				yay "$program" 
+				yay --no-confirm -S "$program" 
 				;;
 	esac
 done < softwarelist.csv
