@@ -156,3 +156,5 @@ useradd -m -g users -G wheel,video,audio -s /bin/bash $user
 printf "Password for user $user\n"
 passwd $user
 
+mkdir /home/$user/{tools,dev}
+
