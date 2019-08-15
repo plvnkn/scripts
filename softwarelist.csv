@@ -1,8 +1,6 @@
 package-name,package-type
-git
 neovim
 firefox
-yay,a
 i3-gaps
 i3blocks
 i3lock
