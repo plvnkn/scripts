@@ -95,7 +95,7 @@ done
 
 cd /usr/share/zoneinfo
 area=$(ls -d */ | grep -v "Etc/\|posix/\|right/\|SystemV/" | cut -f1 -d'/')
-PS3="Select your timezone"
+PS3="Select your timezone: "
 select area1 in $area
 do
     case $area1 in
@@ -105,7 +105,7 @@ do
     esac
 done
 cd -
-
+PS3="Select your area: "
 select area2 in $(ls /usr/share/zoneinfo/$area1)
 do
     case $area2 in

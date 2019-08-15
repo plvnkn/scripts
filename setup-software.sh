@@ -7,8 +7,8 @@ mkdir tools
 cd tools
 git clone https://aur.archlinux.org/yay.git
 cd yay
-makepkg -si
-cd -
+makepkg --noconfirm -si
+cd ~
 
 while IFS=, read -r package type
 do
