@@ -1,8 +1,9 @@
 #!/bin/bash
 
-sudo pacman -S git
+sudo pacman --noconfirm -Syy git
 
 #first install yay to be able to install aur packages#
+mkdir tools
 cd tools
 git clone https://aur.archlinux.org/yay.git
 cd yay

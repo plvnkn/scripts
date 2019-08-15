@@ -21,7 +21,7 @@ mkinitcpio -p linux
 
 #confiuration
 clear
-printf "\n${yellow}Hostname: ${normal}"
+printf "${yellow}Hostname: ${normal}"
 read hostname
 echo $hostname > /etc/hostname
 
@@ -58,7 +58,7 @@ do
     esac
 done
 
-PS3="${yellow}Slect the keymap${normal}: "
+PS3="${yellow}Select the keymap${normal}: "
 options=("us" "de" "ru" "other")
 select opt in "${options[@]}"
 do
@@ -155,6 +155,3 @@ done
 useradd -m -g users -G wheel,video,audio -s /bin/bash $user
 printf "Password for user $user\n"
 passwd $user
-
-mkdir /home/$user/{tools,dev}
-
