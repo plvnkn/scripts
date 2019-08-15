@@ -1,4 +1,6 @@
 package-name,package-type
+git
+neovim
 firefox
 yay,a
 i3-gaps
