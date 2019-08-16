@@ -10,6 +10,7 @@ xorg-xbacklight
 xcompmgr
 libnotify
 dunst
+dmenu,a
 feh
 gnome-keyring
 networkmanager
