@@ -4,14 +4,20 @@ curl https://raw.githubusercontent.com/plvnkn/scripts/master/softwarelist.csv -O
 
 sudo pacman --noconfirm -Syy git
 
+git clone https://github.com/plvnkn/tools
+
+cd tools/st
+sudo make install
+cd ~ 
 
 #first install yay to be able to install aur packages#
-mkdir tools
 cd tools
 git clone https://aur.archlinux.org/yay.git
 cd yay
 makepkg --noconfirm -si
 cd ~
+
+
 
 
 

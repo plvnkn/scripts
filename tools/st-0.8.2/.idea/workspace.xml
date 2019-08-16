@@ -2,37 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b722ea44-df5c-4bb7-ad56-ef176798de62" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../.bash_profile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../config.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../setup-software.sh" beforeDir="false" afterPath="$PROJECT_DIR$/../../setup-software.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../st/FAQ" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../st/LEGACY" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../st/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../st/Makefile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../st/PKGBUILD" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../st/README" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../st/TODO" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../st/arg.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../st/config.def.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../st/config.def.h.orig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../st/config.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../st/config.mk" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../st/st" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../st/st-alpha-0.8.2.diff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../st/st-scrollback-0.8.2.diff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../st/st-scrollback-mouse-0.8.2.diff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../st/st-xresources-20190105-3be4cf1.diff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../st/st.1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../st/st.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../st/st.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../st/st.h.orig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../st/st.h.rej" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../st/st.info" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../st/st.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../st/win.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../st/x.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../st/x.c.orig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../st/x.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../dots/.bash_profile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../dots/config.sh" beforeDir="false" />
     </list>
     <list id="16387ef4-618d-4041-8ad8-86432b741f88" name="Scrollback-Mouse for 0.8.2" comment="Scrollback-Mouse for 0.8.2">
       <changelist_data name="Jacob Prosser" email="jacoblouisprosser@protonmail.com" />
@@ -122,6 +93,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="30" width="1922" height="1053" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24973376" />
