@@ -1,6 +1,9 @@
 #!/bin/bash
 
+curl https://raw.githubusercontent.com/plvnkn/scripts/master/softwarelist.csv -O
+
 sudo pacman --noconfirm -Syy git
+
 
 #first install yay to be able to install aur packages#
 mkdir tools
@@ -9,6 +12,8 @@ git clone https://aur.archlinux.org/yay.git
 cd yay
 makepkg --noconfirm -si
 cd ~
+
+
 
 while IFS=, read -r package type
 do
@@ -21,3 +26,5 @@ do
 				;;
 	esac
 done < softwarelist.csv
+
+rm softwarelist.csv
