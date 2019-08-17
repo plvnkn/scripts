@@ -1,6 +1,6 @@
 package-name,package-type
 neovim
-firefox
+chromium-widevine,a
 i3-gaps
 i3blocks
 i3lock
@@ -10,7 +10,7 @@ xorg-xbacklight
 xcompmgr
 libnotify
 dunst
-dmenu,a
+dmenu
 feh
 gnome-keyring
 networkmanager
