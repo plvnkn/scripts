@@ -31,7 +31,7 @@ read -n 1 -s -r -p "Press any key to continue"
 clear                     
 printf "Preparing disc for install"
 
-cat <<EOF | fdisk /dev/sda
+cat <<EOF | fdisk /dev/nvme0n1
 n
 p
 
@@ -74,11 +74,11 @@ export passwd_encryption=${passwd_encryption}
 
 printf "\nEncrypting disc..."
 
-cat <<EOF | cryptsetup luksFormat --type luks1 -c aes-xts-plain64 -s 512 /dev/sda1
+cat <<EOF | cryptsetup luksFormat --type luks1 -c aes-xts-plain64 -s 512 /dev/nvme0n1p1
 ${passwd_encryption}
 EOF
 
-cat <<EOF | cryptsetup luksOpen /dev/sda1 luks
+cat <<EOF | cryptsetup luksOpen /dev/nvme0n1p1 luks
 ${passwd_encryption}
 EOF
 
