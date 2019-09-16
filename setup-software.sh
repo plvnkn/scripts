@@ -6,10 +6,6 @@ sudo pacman --noconfirm -Syy git
 
 git clone https://github.com/plvnkn/tools
 
-cd tools/st
-sudo make install
-cd ~ 
-
 #first install yay to be able to install aur packages#
 cd tools
 git clone https://aur.archlinux.org/yay.git

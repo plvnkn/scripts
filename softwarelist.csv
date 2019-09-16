@@ -17,4 +17,5 @@ networkmanager
 pulseaudio
 simple-mtpfs,a
 translate-shell
-bash-git-prompt,a
+bash-git-prompt,
+urxvt-perls
