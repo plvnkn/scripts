@@ -26,3 +26,9 @@ do
 done < softwarelist.csv
 
 rm softwarelist.csv
+
+git clone https://github.com/plvnkn/dots
+cd dots
+bash config.sh
+
+rm -r dots
