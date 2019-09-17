@@ -48,7 +48,6 @@ if [[ $dev == "Quit" ]]
 fi
 
 echo $dev
-part=$(lsblk -pl | grep part | awk '{ print $1 }') 
 
 printf "Preparing disc for install"
 
@@ -62,7 +61,7 @@ w
 EOF
 
 printf "disc preparation done"
-
+part=$(lsblk $dev -pl | grep part | awk '{ print $1 }')
 printf "\n${yellow}--- Disc Encryption --- ${normal}"
 
 while true
@@ -136,7 +135,7 @@ chmod +x /mnt/root/*
 #install arch
 pacstrap /mnt base base-devel wpa_supplicant dialog bash-completion grub
 genfstab -Up /mnt > /mnt/etc/fstab
-arch-chroot /mnt /root/setup-system.sh "${passwd_encryption}"
+arch-chroot /mnt /root/setup-system.sh "${passwd_encryption}" "$dev"
 
 printf "\n${yellow}--- Root password ---${normal}"
 arch-chroot /mnt passwd

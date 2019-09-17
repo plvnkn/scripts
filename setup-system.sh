@@ -6,7 +6,7 @@ normal=$(tput sgr0)
 dd if=/dev/urandom of=/crypto_keyfile.bin bs=512 count=4
 
 chmod 000 /crypto_keyfile.bin
-part=$(lsblk -pl | grep part | awk '{ print $1 }')
+part=$(lsblk $2 -pl | grep part | awk '{ print $1 }')
 cat <<EOF | cryptsetup luksAddKey $part /crypto_keyfile.bin
 $1
 EOF
