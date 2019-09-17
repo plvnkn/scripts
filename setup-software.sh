@@ -13,10 +13,6 @@ cd yay
 makepkg --noconfirm -si
 cd ~
 
-
-
-
-
 while IFS=, read -r package type
 do
 	case "$type" in
@@ -30,3 +26,5 @@ do
 done < softwarelist.csv
 
 rm softwarelist.csv
+
+echo "exec i3" > ~/.xinitrc
