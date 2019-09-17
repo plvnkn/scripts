@@ -26,5 +26,3 @@ do
 done < softwarelist.csv
 
 rm softwarelist.csv
-
-echo "exec i3" > ~/.xinitrc
