@@ -28,10 +28,31 @@ printf "\n${yellow}  #####${normal}  ######   #    ####  #\n\n"
                     
                     
 read -n 1 -s -r -p "Press any key to continue"
-clear                     
+clear    
+
+readarray -t devices < <(lsblk -dpnx size -o name,size | grep -Ev "boot|rpmb|loop" | tac)
+
+devices+=("Quit")
+
+PS3="Partition: "
+select dev in "${devices[@]}"
+do
+ break
+done
+
+if [[ $dev == "Quit" ]]
+  then
+     echo "Bye"
+  else
+          dev=$(echo ${dev} | awk '{ print $1; }')
+fi
+
+echo $dev
+part=$(lsblk -pl | grep part | awk '{ print $1 }') 
+
 printf "Preparing disc for install"
 
-cat <<EOF | fdisk /dev/nvme0n1
+cat <<EOF | fdisk "${dev}"
 n
 p
 
@@ -74,11 +95,11 @@ export passwd_encryption=${passwd_encryption}
 
 printf "\nEncrypting disc..."
 
-cat <<EOF | cryptsetup luksFormat --type luks1 -c aes-xts-plain64 -s 512 /dev/nvme0n1p1
+cat <<EOF | cryptsetup luksFormat --type luks1 -c aes-xts-plain64 -s 512 $part
 ${passwd_encryption}
 EOF
 
-cat <<EOF | cryptsetup luksOpen /dev/nvme0n1p1 luks
+cat <<EOF | cryptsetup luksOpen $part luks
 ${passwd_encryption}
 EOF
 

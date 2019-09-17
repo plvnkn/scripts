@@ -6,8 +6,8 @@ normal=$(tput sgr0)
 dd if=/dev/urandom of=/crypto_keyfile.bin bs=512 count=4
 
 chmod 000 /crypto_keyfile.bin
-
-cat <<EOF | cryptsetup luksAddKey /dev/nvme0n1p1 /crypto_keyfile.bin
+part=$(lsblk -pl | grep part | awk '{ print $1 }')
+cat <<EOF | cryptsetup luksAddKey $part /crypto_keyfile.bin
 $1
 EOF
 
@@ -127,7 +127,7 @@ yes | pacman -Sy networkmanager grub
 systemctl enable NetworkManager
 
 sed -i '/^GRUB_CMDLINE_LINUX/c\GRUB_CMDLINE_LINUX="cryptdevice=UUID=%uuid%:luks"' /etc/default/grub
-sed -i s/%uuid%/$(blkid -o value -s UUID /dev/nvme0n1p1)/ /etc/default/grub
+sed -i s/%uuid%/$(blkid -o value -s UUID $part)/ /etc/default/grub
 
 sed -i '/GRUB_ENABLE_CRYPTODISK/c\GRUB_ENABLE_CRYPTODISK=y' /etc/default/grub
 grub-install /dev/sda
