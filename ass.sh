@@ -138,7 +138,7 @@ pacstrap /mnt base base-devel wpa_supplicant dialog bash-completion grub
 genfstab -Up /mnt > /mnt/etc/fstab
 arch-chroot /mnt /root/setup-system.sh "${passwd_encryption}"
 
-echo "${yellow}--- Root password ---${normal}"
+printf "\n${yellow}--- Root password ---${normal}"
 arch-chroot /mnt passwd
 
 umount -R /mnt

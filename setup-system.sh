@@ -25,6 +25,7 @@ printf "${yellow}Hostname: ${normal}"
 read hostname
 echo $hostname > /etc/hostname
 
+printf "\n"
 PS3="${yellow}Select the locale${normal}: "
 options=("en_US" "de_DE" "ru_RU" "other")
 select opt in "${options[@]}"
@@ -58,6 +59,7 @@ do
     esac
 done
 
+printf "\n"
 PS3="${yellow}Select the keymap${normal}: "
 options=("us" "de" "ru" "other")
 select opt in "${options[@]}"
@@ -95,7 +97,8 @@ done
 
 cd /usr/share/zoneinfo
 area=$(ls -d */ | grep -v "Etc/\|posix/\|right/\|SystemV/" | cut -f1 -d'/')
-PS3="Select your timezone: "
+printf "\n"
+PS3="${yellow}Select your timezone:{normal} "
 select area1 in $area
 do
     case $area1 in
@@ -105,6 +108,8 @@ do
     esac
 done
 cd -
+
+printf "\n"
 PS3="Select your area: "
 select area2 in $(ls /usr/share/zoneinfo/$area1)
 do
@@ -135,7 +140,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 
 echo '%wheel ALL=(ALL) ALL' >> /etc/sudoers
 
-printf "${yellow}Adding a new user${normal}"
+printf "\n${yellow}Adding a new user${normal}"
 while true
 	do
 		printf "\nEnter a username and confirm with [ENTER]: "
@@ -153,5 +158,5 @@ while true
 done
 
 useradd -m -g users -G wheel,video,audio -s /bin/bash $user
-printf "Password for user $user\n"
+printf " \n${yellow}Password for user $user{normal}\n"
 passwd $user
