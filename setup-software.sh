@@ -32,3 +32,5 @@ cd dots
 bash config.sh
 cd ~
 sudo rm -r dots
+
+mkdir ~/.local/bin
