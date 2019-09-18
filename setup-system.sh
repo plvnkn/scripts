@@ -97,7 +97,7 @@ done
 cd /usr/share/zoneinfo
 area=$(ls -d */ | grep -v "Etc/\|posix/\|right/\|SystemV/" | cut -f1 -d'/')
 printf "\n"
-PS3="${yellow}Select your timezone:{normal} "
+PS3="${yellow}Select your timezone: ${normal} "
 select area1 in $area
 do
     case $area1 in
@@ -154,5 +154,5 @@ while true
 done
 
 useradd -m -g users -G wheel,video,audio -s /bin/bash $user
-printf " \n${yellow}Password for user $user{normal}\n"
+printf " \n${yellow}Password for user $user ${normal}\n"
 passwd $user
