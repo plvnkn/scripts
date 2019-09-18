@@ -32,7 +32,7 @@ select opt in "${options[@]}"
 do
     case $opt in
         "en_US")
-			echo "LANG=en_US.UTF-8 "> /etc/locale.conf
+        	echo "LANG=en_US.UTF-8 "> /etc/locale.conf
             echo "Your locale is set to 'en_US.UTF-8'"
             break
             ;;
@@ -49,7 +49,7 @@ do
         "other")
 			echo -n "Enter the locale for this machine and confirm with [ENTER]: "
 			read locale
-			echo LANG=$locale.UTF-8 > /etc/hostname
+			echo LANG=$locale.UTF-8 > /etc/locale.conf
 			break
 			;;
         "Quit")
@@ -67,12 +67,11 @@ do
     case $opt in
         "us")
 			echo "KEYMAP=us" > /etc/vconsole.conf
-			echo "us" > /etc/locale.conf
             echo "Your keymap is set to 'us'"
             break
             ;;
         "de")
-			echo "KEYMAP=de" > /etc/vconsole.conf
+			echo "KEYMAP=de-latin1-nodeadkeys" > /etc/vconsole.conf
             echo "Your keymap is set to 'de'"
             break
             ;;
@@ -123,10 +122,7 @@ done
 ln -sf /usr/share/zoneinfo/$area1/$area2 /etc/localtime
 
 echo $lang.UTF-8 >> /etc/locale.gen
-
 echo -e '[multilib]\nInclude = /etc/pacman.d/mirrorlist' >> /etc/pacman.conf
-
-blkid /dev/sda2 | awk '{ print $3 }' | awk -F '"' '$0=$2'
 
 yes | pacman -Sy networkmanager grub
 systemctl enable NetworkManager
@@ -135,7 +131,7 @@ sed -i '/^GRUB_CMDLINE_LINUX/c\GRUB_CMDLINE_LINUX="cryptdevice=UUID=%uuid%:luks"
 sed -i s/%uuid%/$(blkid -o value -s UUID $part)/ /etc/default/grub
 
 sed -i '/GRUB_ENABLE_CRYPTODISK/c\GRUB_ENABLE_CRYPTODISK=y' /etc/default/grub
-grub-install /dev/sda
+grub-install "$2"
 grub-mkconfig -o /boot/grub/grub.cfg
 
 echo '%wheel ALL=(ALL) ALL' >> /etc/sudoers
