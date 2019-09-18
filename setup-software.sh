@@ -31,4 +31,4 @@ git clone https://github.com/plvnkn/dots
 cd dots
 bash config.sh
 cd ~
-rm -r dots
+sudo rm -r dots
