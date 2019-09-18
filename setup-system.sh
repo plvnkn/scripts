@@ -71,7 +71,7 @@ do
             break
             ;;
         "de")
-			echo "KEYMAP=de-latin1-nodeadkeys" > /etc/vconsole.conf
+			echo "KEYMAP=de" > /etc/vconsole.conf
             echo "Your keymap is set to 'de'"
             break
             ;;
