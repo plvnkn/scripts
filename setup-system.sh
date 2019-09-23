@@ -32,17 +32,20 @@ select opt in "${options[@]}"
 do
     case $opt in
         "en_US")
-        	echo "LANG=en_US.UTF-8 "> /etc/locale.conf
+        	echo "LANG=en_US.UTF-8"> /etc/locale.conf
+		echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
             echo "Your locale is set to 'en_US.UTF-8'"
             break
             ;;
         "de_DE")
 			echo "LANG=de_DE.UTF-8 "> /etc/locale.conf
+			echo "de_DE.UTF-8 UTF-8" >> /etc/locale.gen
             echo "Your locale is set to 'de_DE.UTF-8'"
             break
             ;;
         "ru_RU")
 			echo "LANG=ru_RU.UTF-8 "> /etc/locale.conf
+			echo "ru_RU.UTF-8 UTF-8" >> /etc/locale.gen
             echo "Your locale is set to 'ru_RU.UTF-8'"
             break
             ;;
@@ -121,7 +124,8 @@ done
 
 ln -sf /usr/share/zoneinfo/$area1/$area2 /etc/localtime
 
-echo $lang.UTF-8 >> /etc/locale.gen
+locale-gen
+
 echo -e '[multilib]\nInclude = /etc/pacman.d/mirrorlist' >> /etc/pacman.conf
 
 yes | pacman -Sy networkmanager grub
